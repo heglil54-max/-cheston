@@ -14,7 +14,7 @@ game:GetService("UserInputService").JumpRequest:Connect(function()
     end
 end)
 
-task.spawn(function()
+task.spawn(function() 
     while task.wait() do
         pcall(function() game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Options.Spd.Value end)
     end
