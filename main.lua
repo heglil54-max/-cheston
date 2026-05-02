@@ -1,6 +1,6 @@
 -- CHETSON V2.0: GOD MODE [STABLE]
-local Kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Kavo.CreateLib("CHETSON V2.0", "BloodTheme")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("CHETSON V2.0", "BloodTheme")
 
 local Tab = Window:NewTab("Main")
 local Section = Tab:NewSection("Features")
@@ -31,4 +31,3 @@ task.spawn(function()
         end)
     end
 end)
-
