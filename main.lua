@@ -1,27 +1,34 @@
--- CHETSON V2.0: ORION ENGINE [FIXED]
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/ttwizz/Roblox/master/Orion.lua"))()
-local Window = OrionLib:MakeWindow({Name = "CHETSON V2.0", HidePremium = false})
+-- CHETSON V2.0: GOD MODE [STABLE]
+local Kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Kavo.CreateLib("CHETSON V2.0", "BloodTheme")
 
-local Tab = Window:MakeTab({Name = "Main"})
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Features")
 
-_G.InfJump = false
-
-Tab:AddSlider({
-    Name = "Speed", Min = 16, Max = 250, Default = 16, 
-    Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end
-})
-
-Tab:AddToggle({
-    Name = "Infinite Jump", Default = false, 
-    Callback = function(v) _G.InfJump = v end
-})
-
--- Исправленная логика прыжка
-game:GetService("UserInputService").JumpRequest:Connect(function()
-    if _G.InfJump then
-        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-    end
+Section:NewSlider("Speed", "Быстрый бег", 250, 16, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
-OrionLib:MakeNotification({Name = "CHETSON", Content = "Подключено!"})
+Section:NewToggle("Fly Mode", "Полет по камере", function(state)
+    _G.Fly = state
+end)
+
+Section:NewToggle("Inf Jump", "Бесконечный прыжок", function(state)
+    _G.InfJump = state
+end)
+
+-- Логика
+game:GetService("UserInputService").JumpRequest:Connect(function()
+    if _G.InfJump then game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping") end
+end)
+
+task.spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.Fly then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = workspace.CurrentCamera.CFrame.LookVector * 100
+            end
+        end)
+    end
+end)
 
